@@ -14,25 +14,41 @@
             filePath = "RSSchool_T5/1/Converter.m"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "127"
-            endingLineNumber = "127"
-            landmarkName = "-convertType:forCode:"
+            startingLineNumber = "88"
+            endingLineNumber = "88"
+            landmarkName = "-convertType:forCode:andCountry:"
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy
          BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
          <BreakpointContent
-            uuid = "103F0D4F-4970-4F8C-AD98-127E972276A8"
+            uuid = "2DC998B0-06A3-4085-9E0B-7A1EBBB7B8E7"
             shouldBeEnabled = "Yes"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "RSSchool_T5/1/Converter.m"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "116"
-            endingLineNumber = "116"
-            landmarkName = "-convertType:forCode:"
+            startingLineNumber = "60"
+            endingLineNumber = "60"
+            landmarkName = "-converToPhoneNumberNextString:"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "DBB47308-2F93-4F25-96DA-CA70F5A0217B"
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "RSSchool_T5/1/Converter.m"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "70"
+            endingLineNumber = "70"
+            landmarkName = "-convertType:forCode:andCountry:"
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>

@@ -19,6 +19,7 @@ NSString *KeyCountry = @"country";
                                @"+375": @"BY",
                                @"+992": @"TJ",
                                @"+993": @"TM",
+                               @"+994": @"AZ",
                                @"+996": @"KG",
                                @"+998": @"UZ"};
 // Check for +
@@ -35,20 +36,24 @@ NSString *KeyCountry = @"country";
             NSString *phoneNumberCode = [initialString substringWithRange: NSMakeRange(0, code.length)];
             if ([phoneNumberCode isEqualToString: code]) {
                 keyCountry = [codeDict objectForKey:code];
+//                if ([keyCountry isEqualToString:@"RU"] && initialString.length > 2) {
+//
+//                }
                 [initialString deleteCharactersInRange:NSMakeRange(0, code.length)];
                 if (initialString.length > 0) {
-                    keyPhoneNumber = [self convertType:initialString forCode:code];
+                    keyPhoneNumber = [self convertType:initialString forCode:code andCountry: keyCountry];
                 } else {
                     keyPhoneNumber = code;
                 }
-            } else {
-                keyCountry = @"";
-                if (initialString.length > 12) {
-                    keyPhoneNumber = [initialString substringWithRange: NSMakeRange(0, 13)];
-                } else {
-                    keyPhoneNumber = initialString;
-                }
             }
+        }
+    }
+    if (keyCountry.length<1) {
+        keyCountry = @"";
+        if (initialString.length > 12) {
+            keyPhoneNumber = [initialString substringWithRange: NSMakeRange(0, 13)];
+        } else {
+            keyPhoneNumber = initialString;
         }
     }
 
@@ -56,26 +61,26 @@ NSString *KeyCountry = @"country";
     return resultDict;
 }
 
-- (NSString *)convertType:(NSMutableString *)remainString forCode: (NSString *)code {
-    NSString *resultString = code;
-    [resultString stringByAppendingString:@" "];
+- (NSString *)convertType:(NSMutableString *)remainString forCode: (NSString *)code andCountry: (NSString *)country {
+    NSMutableString *resultString = [code mutableCopy];
+    [resultString appendString:@" "];
 
     NSString *formatString = @"";
 
-    if ([code isEqualToString: @"RU"] || [code isEqualToString: @"KZ"]) {
+    if ([country isEqualToString: @"RU"] || [country isEqualToString: @"KZ"]) {
         formatString = @"(xxx) xxx-xx-xx";
-    } else if ([code isEqualToString: @"MD"] || [code isEqualToString: @"AM"] || [code isEqualToString: @"TM"]) {
+    } else if ([country isEqualToString: @"MD"] || [country isEqualToString: @"AM"] || [country isEqualToString: @"TM"]) {
         formatString = @"(xx) xxx-xxx";
     } else {
         formatString = @"(xx) xxx-xx-xx";
     }
     for (int i = 0; i < formatString.length; i++) {
         if (remainString.length != 0 && [formatString characterAtIndex:i] != 'x') {
-            [resultString stringByAppendingString: [formatString substringWithRange: NSMakeRange(i, 1)]];
+            [resultString appendString: [formatString substringWithRange: NSMakeRange(i, 1)]];
 //            [resultString stringByAppendingFormat:@"%c", [formatString characterAtIndex:i]];
         } else if (remainString.length != 0 && [formatString characterAtIndex:i] == 'x') {
 //            [resultString stringByAppendingFormat:@"%c", [remainString characterAtIndex:0]];
-            [resultString stringByAppendingString: [remainString substringWithRange: NSMakeRange(0, 1)]];
+            [resultString appendString: [remainString substringWithRange: NSMakeRange(0, 1)]];
             [remainString deleteCharactersInRange: NSMakeRange(0, 1)];
         }
     }
