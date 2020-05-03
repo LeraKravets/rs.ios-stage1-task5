@@ -12,7 +12,6 @@ NSString *KeyCountry = @"country";
     NSDictionary *resultDict = @{KeyPhoneNumber: @"", KeyCountry: @""};
 
     NSDictionary *codeDict = @{@"+7": @"RU",
-                               @"+77": @"KZ",
                                @"+380": @"UA",
                                @"+373": @"MD",
                                @"+374": @"AM",
@@ -22,7 +21,7 @@ NSString *KeyCountry = @"country";
                                @"+994": @"AZ",
                                @"+996": @"KG",
                                @"+998": @"UZ"};
-// Check for +
+
     if ([initialString characterAtIndex:0] != '+') {
         [initialString insertString:@"+" atIndex:0];
     }
@@ -36,11 +35,11 @@ NSString *KeyCountry = @"country";
             NSString *phoneNumberCode = [initialString substringWithRange: NSMakeRange(0, code.length)];
             if ([phoneNumberCode isEqualToString: code]) {
                 keyCountry = [codeDict objectForKey:code];
-//                if ([keyCountry isEqualToString:@"RU"] && initialString.length > 2) {
-//
-//                }
                 [initialString deleteCharactersInRange:NSMakeRange(0, code.length)];
                 if (initialString.length > 0) {
+                    if ([initialString characterAtIndex:0] == '7') {
+                        keyCountry = @"KZ";
+                    }
                     keyPhoneNumber = [self convertType:initialString forCode:code andCountry: keyCountry];
                 } else {
                     keyPhoneNumber = code;
@@ -64,9 +63,7 @@ NSString *KeyCountry = @"country";
 - (NSString *)convertType:(NSMutableString *)remainString forCode: (NSString *)code andCountry: (NSString *)country {
     NSMutableString *resultString = [code mutableCopy];
     [resultString appendString:@" "];
-
     NSString *formatString = @"";
-
     if ([country isEqualToString: @"RU"] || [country isEqualToString: @"KZ"]) {
         formatString = @"(xxx) xxx-xx-xx";
     } else if ([country isEqualToString: @"MD"] || [country isEqualToString: @"AM"] || [country isEqualToString: @"TM"]) {
@@ -84,7 +81,6 @@ NSString *KeyCountry = @"country";
             [remainString deleteCharactersInRange: NSMakeRange(0, 1)];
         }
     }
-
     return resultString;
 }
 
